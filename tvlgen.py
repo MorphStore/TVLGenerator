@@ -4,16 +4,17 @@ from pathlib import Path
 
 from core.tvlgenerator import TVLGenerator
 
-
 def existing_path(path_str: str):
-    p = Path(path_str).resolve()
-    outpath = Path(p).relative_to(Path(".").resolve())
+    p = Path(path_str)
+    if not p.is_absolute():
+        p = Path(".").joinpath(p)
     if p.exists():
-        if p.is_dir():
-            return str(outpath)
-        raise argparse.ArgumentError(f"{p} is already present but not a directory.")
-    p.mkdir(parents=True)
-    return str(outpath)
+        if not p.is_dir():
+            raise argparse.ArgumentError(f"{p} is already present but not a directory.")
+    else:
+        p.mkdir(parents=True)
+    return str(p.resolve())
+
 
 if __name__ == '__main__':
     logging.basicConfig(#filename="tvlgen.log",

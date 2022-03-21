@@ -18,8 +18,8 @@ class TVLGeneratorConfig(metaclass=Singleton):
                  schema_file: Path
                  ) -> None:
 
-        if generation_out_path.is_absolute():
-            raise Exception(f"Provided path should be relative but is absolut. ({generation_out_path}).")
+        # if generation_out_path.is_absolute():
+        #     raise Exception(f"Provided path should be relative but is absolut. ({generation_out_path}).")
 
         generation_out_path.mkdir(parents=True, exist_ok=True)
 
