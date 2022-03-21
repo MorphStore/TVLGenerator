@@ -30,22 +30,28 @@ if __name__ == '__main__':
         help='Relative or absolut path where TVL should be generated into.',
         dest='outpath')
     parser.add_argument(
-        '-t', '--targets',
-        default=None,
-        nargs='*',
-        dest='targets'
-    )
+        '-c', '--configpath',
+        default="./config/",
+        type=existing_path,
+        help='Relative or absolut path to generator config files.',
+        dest='configpath')
     parser.add_argument(
         '-d', '--datapath',
         default="./primitive_data/",
         type=existing_path,
         help='Relative or absolut path where TVL primitive and extension files are located.',
         dest='datapath')
+    parser.add_argument(
+        '-t', '--targets',
+        default=None,
+        nargs='*',
+        dest='targets'
+    )
     args = parser.parse_args()
     generator = TVLGenerator(
         Path(args.outpath),
-        Path("config/data/templates"),
-        Path("config/data/tvl_generator_schema.yaml"),
+        Path(args.configpath).joinpath("data/templates"),
+        Path(args.configpath).joinpath("data/tvl_generator_schema.yaml"),
         Path(args.datapath),
         Path("static_files")
     )
