@@ -2,4 +2,3 @@
 	path = primitive_data
 	url = git@github.com:MorphStore/TVLPrimitiveData.git
 	branch = main
-	update = merge
